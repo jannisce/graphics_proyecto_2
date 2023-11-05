@@ -329,7 +329,6 @@ pygame.display.set_caption("Proyecto 2: Raycasting")
 pygame.font.init()
 font = pygame.font.Font(None, int(window_height / 10))
 
-
 # Main loop
 fps = 1000
 clock = pygame.time.Clock()
@@ -401,3 +400,50 @@ while welcome_screen:
 
     pygame.display.update()
 
+# Init size of map
+CELLSIZE = 64
+map_width = len(world_map[0]) * CELLSIZE
+map_height = len(world_map) * CELLSIZE
+
+# Init player
+player_position = Vector2D(map_width / 2, map_height / 2)
+player = Player(player_position, 80 * math.pi / 180, 0, 25, 3)
+
+# Init game
+run = True
+while run:
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      run = False
+
+  if game_running:
+    delta_time = clock.tick(fps) / 1000
+
+    window.fill((0, 0, 0))
+
+    render(window, player, world_map)
+    draw_map(window, world_map)
+    draw_player(window, player, len(world_map) * 35, len(world_map[0]) * 35, map_width, map_height)
+
+    fps_text = font.render(f"FPS: {int(clock.get_fps())}", True, (255, 255, 255))
+    text_rect = fps_text.get_rect()
+    text_rect.topright = (window_width - 10, 10)
+    window.blit(fps_text, text_rect)
+
+    player.move_and_rotate(delta_time, pygame.key.get_pressed(), world_map, CELLSIZE)
+
+    exit_font = pygame.font.Font(None, int(window_height / 15))
+    exit_text = exit_font.render("Presione 'q' para salir", True, (255, 255, 255))
+    exit_rect = exit_text.get_rect()
+    exit_rect.bottomright = (window_width - 10, window_height - 10)
+    window.blit(exit_text, exit_rect)
+
+    pygame.display.update()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_q]:
+        pygame.quit()
+        game_running = False
+        run = False
+
+print("\n\n\n\t\t\t¡Gracias por explorar! :)\n\n\n")

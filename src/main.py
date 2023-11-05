@@ -301,3 +301,103 @@ def render(screen, player, map, CELLSIZE, window_width, window_height, world_map
                 )
             current_angle += step
 
+# Init map and its size
+world_map = []
+
+nivel1 = [
+    [1, 1, 1, 1],
+    [1, 0, 0, 1],
+    [1, 0, 0, 1],
+    [1, 1, 1, 1],
+]
+
+nivel2 = [
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+]
+
+# Init window
+window_width = int(320 * 2)
+window_height = int(180 * 2.5)
+window = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("Proyecto 2: Raycasting")
+pygame.font.init()
+font = pygame.font.Font(None, int(window_height / 10))
+
+
+# Main loop
+fps = 1000
+clock = pygame.time.Clock()
+game_running = False
+level1 = True
+welcome_screen = True
+selected_option = 0 
+while welcome_screen:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            welcome_screen = False
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_RETURN]:
+        welcome_screen = False
+        game_running = True
+
+        if selected_option == 0:
+            world_map = nivel1
+        else:
+            world_map = nivel2
+    elif keys[pygame.K_q]:
+        pygame.quit()
+
+    if keys[pygame.K_w]:
+        selected_option = 0  
+    elif keys[pygame.K_s]:
+        selected_option = 1 
+
+    window.fill((0, 0, 0))
+
+    welcome_font = pygame.font.Font(None, int(window_height / 15))
+    welcome_text = welcome_font.render("Bienvenidos al juego", True, (255, 255, 255))
+    option1_text = welcome_font.render("1. NIVEL 1", True, (255, 255, 255))
+    option2_text = welcome_font.render("2. NIVEL 2", True, (255, 255, 255))
+    controls_text = welcome_font.render("Presione Enter para jugar o Q para salir", True, (255, 255, 255))
+
+    controls_text2 = welcome_font.render("WS para seleccionar nivel y moverse", True, (255, 255, 255))
+    controls_text3 = welcome_font.render("AD para dirección", True, (255, 255, 255))
+
+    welcome_rect = welcome_text.get_rect()
+    option1_rect = option1_text.get_rect()
+    option2_rect = option2_text.get_rect()
+    controls_rect = controls_text.get_rect()
+
+    welcome_rect.center = (window_width / 2, window_height / 4)
+    option1_rect.center = (window_width / 2, window_height / 2.5)
+    option2_rect.center = (window_width / 2, window_height / 2)
+    controls_rect.center = (window_width / 2, window_height / 1.5)
+
+    controls_rect2 = controls_text2.get_rect()
+    controls_rect3 = controls_text3.get_rect()
+    controls_rect2.center = (window_width / 2, window_height / 1.3)
+    controls_rect3.center = (window_width / 2, window_height / 1.2)
+
+    if selected_option == 0:
+        option1_text = welcome_font.render("1. NIVEL 1", True, (0, 255, 0))
+        option2_text = welcome_font.render("2. NIVEL 2", True, (255, 255, 255))
+    else:
+        option1_text = welcome_font.render("1. NIVEL 1", True, (255, 255, 255))
+        option2_text = welcome_font.render("2. NIVEL 2", True, (0, 255, 0))
+
+    window.blit(welcome_text, welcome_rect)
+    window.blit(option1_text, option1_rect)
+    window.blit(option2_text, option2_rect)
+    window.blit(controls_text, controls_rect)
+    window.blit(controls_text2, controls_rect2)
+    window.blit(controls_text3, controls_rect3)
+
+    pygame.display.update()
+

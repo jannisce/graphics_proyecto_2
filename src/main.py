@@ -227,4 +227,48 @@ class Player:
       is_horizontal_the_nearest,
     )
   
+# Functions
+
+def draw_map(screen, map):
+  wallColor = (60, 60, 60)
+  floorColor = (115, 115, 115)
+  cellSize = 35
+
+  for y in range(0, len(map)):
+    for x in range(0, len(map[0])):
+      color = floorColor
+      if map[y][x] == 1:
+        color = wallColor
+
+      current_x = x
+      current_y = y
+      pygame.draw.rect(
+          screen,
+          color,
+          (
+              current_x * cellSize,
+              current_y * cellSize,
+              current_x + cellSize,
+              current_y + cellSize,
+          ),
+      )
+
+def draw_player(screen, player, width, height, map_width, map_height):
+    minimap_x = int(player.position.x / map_width * width)
+    minimap_y = int(player.position.y / map_height * height)
+
+    minimap_player_size = 4
+
+    pygame.draw.circle(
+      screen, (255, 255, 255), (minimap_x, minimap_y), minimap_player_size
+    )
+    pygame.draw.line(
+      screen,
+      (255, 255, 255),
+      (minimap_x, minimap_y),
+      (
+        minimap_x + math.cos(player.direction) * minimap_player_size * 2,
+        minimap_y + math.sin(player.direction) * minimap_player_size * 2,
+      ),
+    )
 

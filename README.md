@@ -10,7 +10,7 @@ Al controlar a su jugador, no se debe poder atravesar a las paredes ni debe cras
 | :-------- | :-------------------------------- |
 | `50 pts`      | Juego implementado en RaspberryPi |
 | `10 pts`      | Estética, juego renderizado en buena calidad |
-| `15 pts`      | +25 fps en RaspberryPi y alrededor de +150 fps en MacBook Air M1|
+| `15 pts`      | +25 fps en RaspberryPi y alrededor de +250 fps en MacBook Air M1|
 | `20 pts`      | Cámara con movimiento hacia adelante, atrás y rotación|
 | `10 pts`      | Minimapa arriba a la izquierda  |
 | `5 pts`      | Musica de fondo |

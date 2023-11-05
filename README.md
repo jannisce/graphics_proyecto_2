@@ -34,4 +34,4 @@ Al controlar a su jugador, no se debe poder atravesar a las paredes ni debe cras
   Your browser does not support the video tag.
 </video>
 
-[Enlace a mi video](assets/video.mp4)
+[Enlace a mi video](readme-media/video.mp4)

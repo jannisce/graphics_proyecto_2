@@ -272,3 +272,32 @@ def draw_player(screen, player, width, height, map_width, map_height):
       ),
     )
 
+def render(screen, player, map, CELLSIZE, window_width, window_height, world_map):
+    initial_color = (115, 115, 115)
+    final_color = (80, 80, 80)
+    half_cell = CELLSIZE / 2
+    half_height = window_height / 2
+    d = half_cell / math.tan(player.FOV / 2)
+
+    current_angle = player.direction - player.FOV / 2
+    step = player.FOV / (window_width - 1)
+    for i in range(0, window_width):
+        draw, length, draw_horizontal = player.cast_ray(
+            current_angle, world_map, CELLSIZE, screen
+        )
+        h2 = (length / d) * half_cell
+        if h2 != 0:
+            line_ratio = half_cell / h2
+            half_line_length = half_height * line_ratio
+            if draw:
+                color = final_color
+                if draw_horizontal:
+                    color = initial_color
+                pygame.draw.line(
+                    screen,
+                    color,
+                    (i, half_height + half_line_length),
+                    (i, half_height - half_line_length),
+                )
+            current_angle += step
+

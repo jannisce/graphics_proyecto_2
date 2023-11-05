@@ -31,4 +31,7 @@ Al controlar a su jugador, no se debe poder atravesar a las paredes ni debe cras
 # Video del funcionamiento en la RaspberryPI
 <video width="640" height="360" controls>
   <source src="readme-media/video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
 </video>
+
+[Enlace a mi video](assets/video.mp4)

@@ -321,6 +321,10 @@ nivel2 = [
     [1, 1, 1, 1, 1, 1, 1],
 ]
 
+pygame.init()
+pygame.mixer.music.load('../assets/minecraft-music.mp3')
+pygame.mixer.music.play(-1)
+
 # Init window
 window_width = int(320 * 2)
 window_height = int(180 * 2.5)
@@ -357,7 +361,7 @@ while welcome_screen:
     selected_option = 0  
   elif keys[pygame.K_s]:
     selected_option = 1 
-    
+
   window.fill((0, 0, 0))
 
   welcome_font = pygame.font.Font(None, int(window_height / 15))
